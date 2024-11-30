@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../api/instance";
+import api from "../config/api";
 
 const OrderView = () => {
   const [orders, setOrders] = useState([]);
