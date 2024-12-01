@@ -23,7 +23,7 @@ const RestaurantSetup = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen w-screen overflow-hidden flex justify-center items-center bg-gray-100">
       <h1>식당 설정</h1>
       <input name="name" placeholder="식당 이름" onChange={handleChange} />
       <input

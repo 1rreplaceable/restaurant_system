@@ -22,7 +22,7 @@ const OrderView = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen w-screen overflow-hidden flex justify-center items-center bg-gray-100">
       <h1>주방 화면</h1>
       <ul>
         {orders.map((order) => (

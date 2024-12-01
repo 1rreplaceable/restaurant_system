@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen w-screen overflow-hidden flex justify-center items-center bg-gray-100">
       <h1>로그인</h1>
       <input
         type="text"
