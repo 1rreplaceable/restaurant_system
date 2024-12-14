@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 
+interface Menu {
+  id: number;
+  name: string;
+  price: number;
+}
+
 const MenuManagement = () => {
-  const [menus, setMenus] = useState([
+  const [menus, setMenus] = useState<Menu[]>([
     { id: 1, name: "메뉴1", price: 10000 },
     { id: 2, name: "메뉴2", price: 12000 },
   ]);
-  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const openModal = (menu = null) => {
-    setSelectedMenu(menu);
+  const openModal = (menu: Menu | null = null) => {
+    setSelectedMenu(menu || { id: Date.now(), name: "", price: 0 });
     setIsEditing(!!menu);
     setIsModalOpen(true);
   };
@@ -21,7 +27,9 @@ const MenuManagement = () => {
   };
 
   const handleSave = () => {
-    if (isEditing && selectedMenu) {
+    if (!selectedMenu) return;
+
+    if (isEditing) {
       setMenus(
         menus.map((menu) => (menu.id === selectedMenu.id ? selectedMenu : menu))
       );
@@ -34,7 +42,7 @@ const MenuManagement = () => {
     closeModal();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     setMenus(menus.filter((menu) => menu.id !== id));
   };
 
@@ -87,7 +95,9 @@ const MenuManagement = () => {
                 placeholder="메뉴 이름"
                 value={selectedMenu?.name || ""}
                 onChange={(e) =>
-                  setSelectedMenu({ ...selectedMenu, name: e.target.value })
+                  setSelectedMenu((prev) =>
+                    prev ? { ...prev, name: e.target.value } : null
+                  )
                 }
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-500"
               />
@@ -96,7 +106,9 @@ const MenuManagement = () => {
                 placeholder="가격"
                 value={selectedMenu?.price || ""}
                 onChange={(e) =>
-                  setSelectedMenu({ ...selectedMenu, price: +e.target.value })
+                  setSelectedMenu((prev) =>
+                    prev ? { ...prev, price: +e.target.value } : null
+                  )
                 }
                 className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-500"
               />
