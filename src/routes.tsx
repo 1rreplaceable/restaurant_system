@@ -1,10 +1,11 @@
 import PrivateRoute from "./components/PrivateRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard ";
+import CategoryManagement from "./pages/admin/CategoryManagement";
 import MenuManagement from "./pages/admin/MenuManagement";
 import Login from "./pages/auth/Login";
 import RestaurantSetup from "./pages/auth/RestaurantSetup";
-import MenuSelection from "./pages/MenuSelection";
-import OrderView from "./pages/OrderView";
+import MenuSelection from "./pages/client/MenuSelection";
+import OrderView from "./pages/kitchen/OrderView";
 
 const routes = [
   {
@@ -16,7 +17,7 @@ const routes = [
     element: <RestaurantSetup />,
   },
   {
-    path: "/menu-selection",
+    path: "/menu",
     element: <PrivateRoute element={<MenuSelection />} />,
   },
   {
@@ -32,8 +33,8 @@ const routes = [
     element: <PrivateRoute element={<MenuManagement />} />,
   },
   {
-    path: "/admin/table-status",
-    // element: <PrivateRoute element={<TableStatus />} />,
+    path: "/admin/category-management",
+    element: <PrivateRoute element={<CategoryManagement />} />,
   },
   {
     path: "/admin/settings",

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import useRestaurantStore from "../../stores/restaurantStore";
 
 interface Menu {
   id: number;
   name: string;
   price: number;
 }
-
 const MenuManagement = () => {
+  const { restaurantId } = useRestaurantStore();
   const [menus, setMenus] = useState<Menu[]>([
     { id: 1, name: "메뉴1", price: 10000 },
     { id: 2, name: "메뉴2", price: 12000 },

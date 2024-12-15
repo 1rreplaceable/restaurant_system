@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../config/api";
 import { LoginResponse } from "./types/Login";
+import useRestaurantStore from "../../stores/restaurantStore";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setRestaurantId } = useRestaurantStore();
 
   const handleLogin = async () => {
     try {
-      const response = await api.post<LoginResponse>("/auth/login", {
+      const response = await api.post<LoginResponse>("/api/auth/login", {
         username,
         password,
       });
-      localStorage.setItem("token", response.data.token);
-      const role = response.data.role;
+      const { token, role, id } = response.data;
+      localStorage.setItem("token", token);
+      setRestaurantId(id);
       navigate(role === "ADMIN" ? "/admin" : "/menu");
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
